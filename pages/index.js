@@ -1,8 +1,9 @@
 import React from 'react'
 import Head from 'next/head'
+import fetch from 'isomorphic-fetch';
 import Nav from '../components/nav'
 
-const Home = () => (
+const Home = ({posts, comments}) => (
   <div>
     <Head>
       <title>Home</title>
@@ -17,21 +18,22 @@ const Home = () => (
       </p>
 
       <div className='row'>
-        <a href='https://nextjs.org/docs' className='card'>
-          <h3>Documentation &rarr;</h3>
-          <p>Learn more about Next.js in the documentation.</p>
-        </a>
-        <a href='https://nextjs.org/learn' className='card'>
-          <h3>Next.js Learn &rarr;</h3>
-          <p>Learn about Next.js by following an interactive tutorial!</p>
-        </a>
-        <a
-          href='https://github.com/zeit/next.js/tree/master/examples'
-          className='card'
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Find other example boilerplates on the Next.js GitHub.</p>
-        </a>
+        {comments.map(comment=>(
+          <a href='https://nextjs.org/docs' className='card' key={comment.id}>
+            <h3>{comment.title} &rarr;</h3>
+            <p>{comment.body}</p>
+          </a>
+        ))}
+      </div>
+
+
+      <div className='row'>
+        {posts.map(post=>(
+          <a href='https://nextjs.org/docs' className='card' key={post.id}>
+            <h3>{post.title} &rarr;</h3>
+            <p>{post.body}</p>
+          </a>
+        ))}
       </div>
     </div>
 
@@ -56,6 +58,7 @@ const Home = () => (
         margin: 80px auto 40px;
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         justify-content: space-around;
       }
       .card {
@@ -84,5 +87,14 @@ const Home = () => (
     `}</style>
   </div>
 )
+
+Home.getInitialProps = async () => {
+  const [posts, comments] = await Promise.all([
+    fetch('https://jsonplaceholder.typicode.com/posts').then(r=>r.json()),
+    fetch('https://jsonplaceholder.typicode.com/comments').then(r=>r.json())
+  ]);
+
+  return {posts, comments};
+}
 
 export default Home

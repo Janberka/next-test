@@ -5,27 +5,31 @@ import Hero from '../../components/hero';
 import Row from '../../components/row';
 import Card from '../../components/card';
 
-const Post = ({ post }) => {
-  const [ comments, setComments ] = useState([]);
+const Post = ({ post: { id, title, description, body } }) => {
+  const [ comments, setComments ] = useState(false);
 
-  useEffect(async() => {
-    if (!comments.length) {
-      const loadedComments = await fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`).then(r=>r.json());
-      setComments(loadedComments);
+  useEffect(() => {
+    if (!comments) {
+      const loadComments = async() => {
+        const loadedComments = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`).then(r=>r.json());
+        setComments(loadedComments);
+      }
+
+      loadComments();
     }
   }, []);
 
   return (
-    <Layout title={post.title}>
+    <Layout title={title}>
       <Hero
-        title={post.title}
-        description={post.description}
+        title={title}
+        description={description}
       >
-        <Row>{post.body}</Row>
+        <Row>{body}</Row>
       </Hero>
       <Row>
-      {comments.map(comment=>(
-        <Card key={comment.id}>
+      {comments && comments.map(comment=>(
+        <Card key={comment.id} href='#'>
           <p>{comment.body}</p>
         </Card>
       ))}

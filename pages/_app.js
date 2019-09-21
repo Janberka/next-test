@@ -2,6 +2,7 @@ import React from 'react';
 import App from 'next/app';
 import { AnimatePresence } from 'framer-motion';
 import { ThemeProvider } from 'styled-components'
+import Layout from '../components/layout';
 
 const theme = {
   colors: {
@@ -16,7 +17,9 @@ class MyApp extends App {
     return (
       <AnimatePresence exitBeforeEnter>
         <ThemeProvider theme={theme}>
-          <Component {...pageProps} key={router.route} />
+          <Layout>
+            <Component {...pageProps} key={router.route} />
+          </Layout>
         </ThemeProvider>
       </AnimatePresence>
     );

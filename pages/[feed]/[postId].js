@@ -1,4 +1,3 @@
-import Layout from '../../components/layout';
 import Hero from '../../components/hero';
 import Row from '../../components/row';
 import Comments from '../../components/comments';
@@ -12,13 +11,13 @@ const Post = ({
   }
 }) => {
   return (
-    <Layout title={title}>
+    <>
       <Hero title={title}/>
       <Row style={{maxHeight: '300px', overflow: 'hidden'}}>
         <div dangerouslySetInnerHTML={{ __html: description }}/>
       </Row>
       <Comments postId={postId}/>
-    </Layout>
+    </>
   );
 }
 

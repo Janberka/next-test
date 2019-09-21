@@ -15,7 +15,7 @@ const variants = {
 
 const Feed = ({feed, posts}) => {
   return (
-    <Layout title={feed.title}>
+    <>
       <Hero
         title={feed.title}
         description={<a target="_blank" href={feed.website}>{feed.website}</a>}
@@ -29,7 +29,7 @@ const Feed = ({feed, posts}) => {
             ))}
         </Row>
       </motion.div>
-    </Layout>
+    </>
   )
 };
 

@@ -1,6 +1,6 @@
 import feed from '../feed';
 
-const selector = ({title, link}) => ({title, link});
+const selector = ({ title, link }) => ({ title, link });
 
 export default (req, res) => 
     feed.then(posts=> 

@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch';
+
 export default (req, res) => 
     fetch(`https://jsonplaceholder.typicode.com/posts/${req.query.id}/comments`)
       .then(r=> r.json())

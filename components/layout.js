@@ -4,6 +4,7 @@ import Nav from './nav';
 const Layout = ({ children, title = 'Home' }) => (
   <div className="layout">
     <Head>
+      <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
       <title>{title}</title>
     </Head>
     <Nav />

@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 import Layout from '../../components/layout';
 import Hero from '../../components/hero';
 import Row from '../../components/row';
-import Comments from '../../components/Comments';
+import Comments from '../../components/comments';
 
 const Post = ({
   id,

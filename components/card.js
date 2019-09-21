@@ -11,6 +11,7 @@ const CardContent = styled(motion.a)`
   text-decoration: none;
   color: #434343;
   border: 1px solid #9b9b9b;
+  border-radius: 3px;
 
   h3 {
     margin: 0;
@@ -26,14 +27,8 @@ const CardContent = styled(motion.a)`
 `;
 
 const cardVariants = {
-  initial: { scale: 0.96, y: 30, opacity: 0 },
-  enter: { scale: 1, y: 0, opacity: 1, transition: { duration: 0.5, ease: [0.48, 0.15, 0.25, 0.96] } },
-  exit: {
-    scale: 0.6,
-    y: 100,
-    opacity: 0,
-    transition: { duration: 0.2, ease: [0.48, 0.15, 0.25, 0.96] }
-  }
+  hidden: { opacity: 0, scale: .9 },
+  show: { opacity: 1, scale: 1 }
 };
 
 const Card = ({href, as, children}) => {

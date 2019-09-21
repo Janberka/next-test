@@ -1,9 +1,9 @@
-import fetch from 'isomorphic-fetch';
 import { motion } from 'framer-motion';
 import Layout from '../components/layout';
 import Hero from '../components/hero';
 import Row from '../components/row';
 import Card from '../components/card';
+import { getPosts } from '../utils';
 
 const Home = ({ posts }) => (
   <Layout>
@@ -29,7 +29,7 @@ const Home = ({ posts }) => (
 );
 
 Home.getInitialProps = async () => {
-  const posts = await fetch('http://localhost:3000/api/posts').then(r=>r.json());
+  const posts = await getPosts();
   return { posts };
 };
 

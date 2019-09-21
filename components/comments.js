@@ -4,6 +4,7 @@ import {
 import fetch from 'isomorphic-fetch';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { getComments } from '../utils';
 
 const Comment = ({className, email, body}) => {
   return (
@@ -32,7 +33,7 @@ const Comments = (props) => {
   useEffect(() => {
     if (!comments) {
       const loadComments = async() => {
-        const loadedComments = await fetch(`http://localhost:3000/api/posts/${postId}/comments`).then(r=>r.json());
+        const loadedComments = await getComments(postId);
 
         setComments(loadedComments);
       }

@@ -6,7 +6,7 @@ import { getPost } from '../../utils';
 
 
 const Post = ({
-  id,
+  postId,
   post: {
     title, description
   }
@@ -17,14 +17,13 @@ const Post = ({
       <Row style={{maxHeight: '300px', overflow: 'hidden'}}>
         <div dangerouslySetInnerHTML={{ __html: description }}/>
       </Row>
-      <Comments postId={id}/>
+      <Comments postId={postId}/>
     </Layout>
   );
 }
 
-Post.getInitialProps = async({query: {id}}) => {
-  const post = await getPost(id);
-  return { id, post };
-}
+Post.getInitialProps = ({query: {feed, postId}}) => 
+  getPost(feed, postId)
+    .then(post => ({postId, post}));
 
 export default Post;
